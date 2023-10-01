@@ -37,7 +37,10 @@ public class CalculadoraPOO {
          * Resolver operações
          * Devolver resultado
         **/
-        String exp = "50X*(320e+2555)- 2";
+        double resultado;
+        
+        
+        String exp = "50*2";
         
         //Removendo espaços e Letras da String
         exp = exp.replace(" ", "");
@@ -45,13 +48,42 @@ public class CalculadoraPOO {
         exp = exp.replaceAll("([a-z])","");
         
         
+        
+        
         //Convertendo String tratada(expProcessed) em Array
         String[] expArray;
        
         expArray = exp.split("(?<=[-+*/()])|(?=[-+*/()])"); //Array é preenchido com cada elemento da Expressão (Output: [50, *, 320, +, 2555, -, 0])
+        
         System.out.println(Arrays.toString(expArray));
         
+        System.out.println(efetuar(expArray[0],expArray[1],expArray[2]));
+        
 
+    }
+    
+    //Efetuar operação com dois elementos
+    static double efetuar(String numA,String operador,String numB){
+            double resultado=0;
+            double numeroA= Double.parseDouble(numA);
+            double numeroB= Double.parseDouble(numB);
+            
+            switch(operador){
+                case "*":
+                    resultado = numeroA*numeroB;
+                    break;
+                case "/":
+                    resultado = numeroA/numeroB;
+                    break;
+                case "+":
+                    resultado = numeroA-numeroB;
+                    break;
+                case "-":
+                    resultado = numeroA+numeroB;
+                    break;
+            }
+                    
+            return resultado;
     }
     
 }
