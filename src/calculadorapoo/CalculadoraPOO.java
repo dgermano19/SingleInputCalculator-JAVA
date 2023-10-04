@@ -21,69 +21,55 @@ Exercício 4
  */
 
 import java.util.*;  
+import javax.swing.JOptionPane;
 
 public class CalculadoraPOO {
 
     /**
      * @param args the command line arguments
      */
+    
+    static String exp;
+    static String[] expArray;
+    static String[] currentOperation;
+    
     public static void main(String[] args) {
-        /**
-         * Ler string com expressão matemática
-         * Remover espaços
-         * Identificar numeros
-         * Identificar operadores
-         * Identificar parenteses
-         * Resolver operações
-         * Devolver resultado
-        **/
-        double resultado;
-        
-        
-        String exp = "50*2";
+                
+        writeExp();
+       
+        try{
+            int i=0;
+            int c=0;
+            
+            if(expArray[i]=="("){
+                
+                while(expArray[c] != ")"){
+                        currentOperation[c] = expArray[c];
+                        c++;
+                }
+                
+            }else{
+                    i++;
+                }
+            
+        }catch(NumberFormatException numberException){
+            System.out.println("Invalid Expression, try again");
+            writeExp();
+        }
+    }
+    
+    static void writeExp(){
+        exp = JOptionPane.showInputDialog("Calculator");
         
         //Removendo espaços e Letras da String
         exp = exp.replace(" ", "");
         exp = exp.replaceAll("([A-Z])","");
         exp = exp.replaceAll("([a-z])","");
         
-        
-        
-        
         //Convertendo String tratada(expProcessed) em Array
-        String[] expArray;
-       
         expArray = exp.split("(?<=[-+*/()])|(?=[-+*/()])"); //Array é preenchido com cada elemento da Expressão (Output: [50, *, 320, +, 2555, -, 0])
-        
-        System.out.println(Arrays.toString(expArray));
-        
-        System.out.println(efetuar(expArray[0],expArray[1],expArray[2]));
-        
-
-    }
+        System.out.println(Arrays.toString(expArray)); 
+    } 
     
     //Efetuar operação com dois elementos
-    static double efetuar(String numA,String operador,String numB){
-            double resultado=0;
-            double numeroA= Double.parseDouble(numA);
-            double numeroB= Double.parseDouble(numB);
-            
-            switch(operador){
-                case "*":
-                    resultado = numeroA*numeroB;
-                    break;
-                case "/":
-                    resultado = numeroA/numeroB;
-                    break;
-                case "+":
-                    resultado = numeroA-numeroB;
-                    break;
-                case "-":
-                    resultado = numeroA+numeroB;
-                    break;
-            }
-                    
-            return resultado;
-    }
-    
 }
